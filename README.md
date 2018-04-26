@@ -1,4 +1,4 @@
-# Fun-personal-projects
+# Fun-Projects
 
 monsterstrike.py
 
