@@ -14,3 +14,7 @@ The incomplete image file must be manually removed, so a new complete image may 
 Originally run on Xcode.
 
 Generates a specified number of random answer choices (a,b,c,d)
+
+
+## scraper1.py and scraper2.py<br/>
+Web scrapers to grab text from specific websites.
