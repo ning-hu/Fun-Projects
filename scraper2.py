@@ -29,7 +29,7 @@ def scrape(url, output_file):
             for tag in tags_to_ignore:
                 tag.replace_with("")
 
-            if ("e" in child.text or "E" in child.text):
+            if ("e" in child.text or "E" in child.text or child.text == ""):
                 continue
             
             print(f"　　{child.text}", file=output_file)
