@@ -3,7 +3,7 @@ import argparse
 import requests
 from bs4 import BeautifulSoup
 
-def scrape(url, output_file, ch):
+def scrape(url, output_file):
     # Fetch the page
     response = requests.get(url)
 
@@ -12,7 +12,7 @@ def scrape(url, output_file, ch):
 
     title_div = soup.find(id="nr_title")
     if title_div:
-        print(f"{ch}. {title_div.text}", file=output_file)
+        print(f"{title_div.text}", file=output_file)
 
     # Find the div with id "nr1
     content_div = soup.find(id="nr1")
@@ -29,6 +29,9 @@ def scrape(url, output_file, ch):
             for tag in tags_to_ignore:
                 tag.replace_with("")
 
+            if ("e" in child.text or "E" in child.text):
+                continue
+            
             print(f"　　{child.text}", file=output_file)
 
     # Find the li with class "next"
@@ -39,7 +42,7 @@ def scrape(url, output_file, ch):
         next_a = next_li.find("a")
         if next_a:
             next_link = next_a.get("href")
-            scrape(next_link, output_file, ch+1)
+            scrape(next_link, output_file)
 
 # Parse the command-line arguments
 parser = argparse.ArgumentParser()
@@ -50,4 +53,4 @@ args = parser.parse_args()
 # Open the output file
 with io.open(args.output_file, "w", encoding="utf-8") as f:
   # Start the scraper
-  scrape(args.url, f, 1)
+  scrape(args.url, f)
